@@ -16,7 +16,16 @@ const PORT = process.env.PORT || 3001;
 // Middleware for parsing JSON & urlencoded data
 app.use(express.json());
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+
+
+// HTML Routes
+app.get("/", (req, res) => {
+    res.sendFile("./public/index.html");
+});
+
+app.get("/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
 
 
 // API Routes
@@ -43,7 +52,7 @@ app.post("/api/notes", (req, res) => {
             newNote.id = uuidv4();
             let savedNote = JSON.parse(data);
             savedNote.push(newNote);
-            fs.writeFile("./db/db.json", JSON.stringify(savedNote, null, 4), (err) => {
+            fs.writeFile("./db/db.json", JSON.stringify(savedNote), (err) => {
                 if (err) {
                     res.json(err).status(500);
                 } else {
@@ -55,16 +64,6 @@ app.post("/api/notes", (req, res) => {
 });
 
 // BONUS: DELETE request
-
-
-// HTML Routes
-app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/notes.html"));
-});
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.html"));
-});
 
 
 // Starts the server
