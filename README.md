@@ -13,6 +13,7 @@
 An application called Note Taker that can be used to write and save notes. This application uses an Express.js back end and will save and retrieve note data from a JSON file.
 
 ## Usage
+Deployed app: https://note-taker316.herokuapp.com/
 This app runs in the browser. When the page loads, the user selects "Get Started." The user is then aple to input a note title and text. When the title and text fields are populated, the user may click the save icon in the top right corner. This saves the note and renders the title in the small column on the left side of the screen. Users may come back to this page at a later date and still see their notes stored.
 
 ## Installation
