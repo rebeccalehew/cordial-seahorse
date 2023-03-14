@@ -32,7 +32,6 @@ app.get("/api/notes", (req, res) => {
     })
 });
 
-
 // Fetch - POST request
 app.post("/api/notes", (req, res) => {
     // Receive new note to save on req.body, append new note to db.json, and return new note to user
@@ -44,8 +43,7 @@ app.post("/api/notes", (req, res) => {
             newNote.id = uuidv4();
             let savedNote = JSON.parse(data);
             savedNote.push(newNote);
-
-            fs.writeFile("./db/db.json", JSON.stringify(savedNote), (err) => {
+            fs.writeFile("./db/db.json", JSON.stringify(savedNote, null, 4), (err) => {
                 if (err) {
                     res.json(err).status(500);
                 } else {
@@ -57,22 +55,16 @@ app.post("/api/notes", (req, res) => {
 });
 
 // BONUS: DELETE request
-app.delete("/api/notes/:id", (req, res) => {
-    let savedNoteID = req.params.id;
-    fs.readFile("./db/db.json", "utf-8", (err, data) => {
-        
-    })
-})
 
 
 // HTML Routes
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
-})
+    res.sendFile(path.join(__dirname, "./public/notes.html"));
+});
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
-})
+    res.sendFile("./public/index.html");
+});
 
 
 // Starts the server
