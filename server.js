@@ -50,13 +50,13 @@ app.post("/notes", (req, res) => {
         } else {
             let newNote = req.body;
             newNote.id = uuidv4();
-            let savedNote = JSON.parse(data);
-            savedNote.push(newNote);
-            fs.writeFile("./db/db.json", JSON.stringify(savedNote), (err) => {
+            saveNote = JSON.parse(data);
+            saveNote.push(newNote);
+            fs.writeFile(path.join(__dirname, "./db/db.json"), JSON.stringify(saveNote), (err) => {
                 if (err) {
                     res.status(500).json(err);
                 } else {
-                    res.status(200).json(savedNote);
+                    res.status(200).json(saveNote);
                 }
             })
         }
