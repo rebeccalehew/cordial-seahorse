@@ -34,19 +34,19 @@ app.get("/api/notes", (req, res) => {
     // Read db.json file & return all saved notes as JSON
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
         if (err) {
-            res.json(err).status(500);
+            res.status(500).json(err);
         } else {
-            res.send(data).status(200);
+            res.status(200).send(data);
         }
     })
 });
 
 // Fetch - POST request
-app.post("/api/notes", (req, res) => {
+app.post("/notes", (req, res) => {
     // Receive new note to save on req.body, append new note to db.json, and return new note to user
     fs.readFile("./db/db.json", "utf-8", (err, data) => {
         if (err) {
-            res.json(err).status(500);
+            res.status(500).json(err);
         } else {
             let newNote = req.body;
             newNote.id = uuidv4();
@@ -54,9 +54,9 @@ app.post("/api/notes", (req, res) => {
             savedNote.push(newNote);
             fs.writeFile("./db/db.json", JSON.stringify(savedNote), (err) => {
                 if (err) {
-                    res.json(err).status(500);
+                    res.status(500).json(err);
                 } else {
-                    res.json(savedNote).status(200);
+                    res.status(200).json(savedNote);
                 }
             })
         }
