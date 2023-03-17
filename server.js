@@ -54,7 +54,18 @@ app.post("/api/notes", (req, res) => {
     })
 });
 
-// BONUS: DELETE request
+// BONUS: DELETE request -- work in progress
+// app.delete("/api/notes/:id", (req, res) => {
+//     // Receives a query parameter that contains the id of a note to delete, reads all notes from the db.json file, removes the note with the given id property, and then rewrites the notes to the db.json file. 
+//     let noteId = req.params.id;
+//     fs.readFile("./db/db.json", "utf-8", (err, data) => {
+//         if (err) {
+//             res.status(500).json(err);
+//         } else {
+//             *
+//         }      
+//     })
+// });
 
 
 // HTML Routes
